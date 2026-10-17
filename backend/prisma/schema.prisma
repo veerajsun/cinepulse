@@ -1,0 +1,53 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Article {
+  id           String   @id @default(uuid())
+  title        String
+  slug         String   @unique
+  excerpt      String
+  content      String?
+  imageUrl     String
+  sourceName   String
+  sourceUrl    String   @unique
+  canonicalUrl String
+  category     String   // "movies" | "web-series" | "anime" | "k-drama" | "general"
+  subCategory  String?
+  tags         String   @default("[]") // Stored as JSON string array
+  isFeatured   Boolean  @default(false)
+  isTrending   Boolean  @default(false)
+  readTime     String?  @default("4 min read")
+  score        Float?   @default(9.0)
+  author       String?  @default("Syndicate Wire")
+  episodes     String?
+  platform     String?
+  rank         Int?
+  guid         String   @unique
+  fetchedAt    DateTime @default(now())
+  publishedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category, publishedAt])
+  @@index([publishedAt])
+}
+
+model RssSource {
+  id                   String    @id @default(uuid())
+  name                 String
+  url                  String    @unique
+  category             String    // Target category ("movies", "web-series", "anime", "k-drama", "general")
+  enabled              Boolean   @default(true)
+  priority             Int       @default(1)
+  fetchInterval        Int       @default(15) // Minutes
+  lastFetchedAt        DateTime?
+  lastFetchStatus      String?   // "SUCCESS" | "FAILED"
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}

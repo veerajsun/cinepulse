@@ -1,0 +1,68 @@
+# ==============================================================================
+# CinePulse Entertainment News Portal - Git Ignore Rules
+# ==============================================================================
+
+# Dependencies (Root, Frontend, Backend, and any subdirectories)
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+
+# Production & Development Build Outputs
+.next/
+**/.next/
+out/
+build/
+**/build/
+dist/
+**/dist/
+*.tsbuildinfo
+
+# Environment & Secret Files (Protect API keys, DB credentials, local configs)
+.env
+.env*.local
+.env.*
+!.env.example
+!**/.env.example
+
+# Local SQLite Database Files (Prevent committing runtime database files)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Logs & Process Output
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS-generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor & IDE Directories
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing & Cache Artifacts
+.cache/
+.parcel-cache/
+.turbo/
